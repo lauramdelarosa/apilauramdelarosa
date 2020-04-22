@@ -1,0 +1,17 @@
+const ForbiddenAccess = use('App/Exceptions/ForibiddenAccessException')
+const ResourceNotFound = use('App/Exceptions/ResourceNotFoundException')
+
+class AuthorizationService {
+    verifyPermission(resource, user) {
+        if (!resource) {
+            throw new ResourceNotFound();
+        }
+
+        if (resource.user_id != user.id) {
+           throw new ForbiddenAccess();
+        }
+    }
+
+}
+
+module.exports = new AuthorizationService
